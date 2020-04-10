@@ -11,13 +11,19 @@ int main(int argc, char* argv[])
 	set0(chp);
 	struct packet* data;							// network packet
 	
-	if((x = sfd_client = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
+	// if((x = sfd_client = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
+	// 	er("socket()", x);
+
+		
+	if((x = sfd_client = socket(PF_INET, SOCK_STREAM,0)) < 0)
 		er("socket()", x);
 	
 	memset((char*) &sin_server, 0, sizeof(struct sockaddr_in));
 	sin_server.sin_family = AF_INET;
 	sin_server.sin_addr.s_addr = inet_addr(IPSERVER);
 	sin_server.sin_port = htons(PORTSERVER);
+
+	printf("%s, %d\n", IPSERVER, PORTSERVER);
 	
 	if((x = connect(sfd_client, (struct sockaddr*) &sin_server, size_sockaddr)) < 0)
 		er("connect()", x);
@@ -25,6 +31,11 @@ int main(int argc, char* argv[])
 	printf(ID "FTP Client started up. Attempting communication with server @ %s:%d...\n\n", IPSERVER, PORTSERVER);
 	//END: initialization
 
+	int ret_login = login(x, USER, PASSWD);
+	if(ret_login ! =0 )
+	{
+		er("login()", ret_login);
+	}
 	
 	struct command* cmd;
 	char lpwd[LENBUFFER], pwd[LENBUFFER];
@@ -176,3 +187,8 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+
+int login( int fd, const char* user, const char* passwd)
+{
+	
+}

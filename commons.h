@@ -83,9 +83,13 @@
 
 #define	DEBUG		1
 
-#define	PORTSERVER	8487
+#define	PORTSERVER      8487
+// #define	PORTSERVER	21 //8487
 #define CONTROLPORT	PORTSERVER
 #define DATAPORT	(PORTSERVER + 1)
+
+#define USER "zx"
+#define PASSWD "HXftp123456";
 
 enum TYPE
 	{

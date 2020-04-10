@@ -1,6 +1,7 @@
 #include <commons.h>
 #include <file_transfer_functions.h>
 
+// #define IPSERVER	"47.105.217.224" //"127.0.0.1"
 #define IPSERVER	"127.0.0.1"
 #define	ID		"CLIENT=> "
 
@@ -16,6 +17,7 @@ struct command
 struct command* userinputtocommand(char [LENUSERINPUT]);
 
 void printcommand(struct command*);
+int login(int fd, const char* user, const char* passwd);
 
 void command_pwd(struct packet*, struct packet*, int);
 void command_lcd(char*);
